@@ -8,7 +8,6 @@ var wordList = ["national", "yosemite", "government", "wildlife", "conservancy",
 var wins = 0; // Keep track of the number of wins.
 var losses = 0; // Keep track of the number of losses.
 var previousWord = ""; // Record the last word chosen so it won't be repeated.
-var guessesRemaining = 7; // Keep track of the number of guesses remaining.
 var guessedLetters = new Array(); // Keep track of the guessed letters.
 
 // Hold the text containers in the html in vars.
@@ -18,13 +17,14 @@ var winsText = document.getElementById("victories");
 var lossesText = document.getElementById("defeats");
 var remainingGuessesText = document.getElementById("guesses-remaining");
 
-remainingGuessesText.textContent = guessesRemaining;
 winsText.textContent = wins;
 lossesText.textContent = losses;
 
 // Randomly chooses a word from the array of available words.
 var wordChosen = wordList[Math.floor(Math.random() * wordList.length)];
 var wordHolder = new Array(wordChosen.length); // Create an array the same length as the chosen word.
+var guessesRemaining = wordChosen.length + 2; // Keep track of the number of guesses remaining.
+remainingGuessesText.textContent = guessesRemaining;
 console.log(wordChosen);
 // 
 for (var i = 0; i < wordChosen.length; i++) {
@@ -117,6 +117,7 @@ document.onkeyup = function (event) {
         guessesRemaining = 7; // Keep track of the number of guesses remaining.
 
         remainingGuessesText.textContent = guessesRemaining;
+    
     } else if (guessesRemaining <= 0 && !wordFound) {
         alert("Sorry, you lost!");
 
@@ -142,3 +143,4 @@ document.onkeyup = function (event) {
         remainingGuessesText.textContent = guessesRemaining;      
     }
 }
+
