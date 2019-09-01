@@ -25,7 +25,7 @@ lossesText.textContent = losses;
 // Randomly chooses a word from the array of available words.
 var wordChosen = wordList[Math.floor(Math.random() * wordList.length)];
 var wordHolder = new Array(wordChosen.length); // Create an array the same length as the chosen word.
-
+console.log(wordChosen);
 // 
 for (var i = 0; i < wordChosen.length; i++) {
     wordHolder[i] = "_";
@@ -87,11 +87,12 @@ document.onkeyup = function (event) {
         remainingGuessesText.textContent = guessesRemaining; // Print the remaining guesses.
     }
 
-    // // Check to see if the word has been successfully found.
-    // var wordFound = false;
-    // if (guessedLetters.indexOf("_") == -1) {
-    //     wordFound = true;
-    // }
+    // Check to see if the word has been successfully found.
+    var wordFound = false;
+    if (wordHolder.indexOf("_") == -1) {
+        wordFound = true;
+    }
+    console.log(wordFound);
 
     // if (guessesRemaining <= 0 && wordFound) {
     //     alert("Congratulations! You won!");
