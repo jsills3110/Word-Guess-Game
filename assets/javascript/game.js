@@ -53,7 +53,7 @@ document.onkeyup = function(event) {
         }
         hiddenWordText.textContent = tempWord;
         tempWord = "";
-        for (var m = 0; m < wordHolder.length; m++) {
+        for (var m = 0; m < guessedLetters.length; m++) {
             tempWord += guessedLetters[m];
         }
         guessedLettersText.textContent = tempWord;
