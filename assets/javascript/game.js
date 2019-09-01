@@ -40,7 +40,7 @@ document.onkeyup = function (event) {
     if (!userGuess.match(/^[a-z]+$/i)) {
         alert("You must enter an alpha value; no other keys are allowed.");
 
-    // Check that the letter was not already guessed.
+        // Check that the letter was not already guessed.
     } else if (guessedLetters.indexOf(userGuess) !== -1) {
         alert("You have already guessed that letter; try a different one.");
 
@@ -70,6 +70,13 @@ document.onkeyup = function (event) {
 
         guessesRemaining--;
 
+        // Check to see if the word has been successfully found.
+        var wordFound = false;
+        if (wordHolder.indexOf("_") == -1) {
+            wordFound = true;
+        }
+        console.log(wordFound);
+
         // Print the wordChosen to the document.
         var tempWord = "";
         for (var l = 0; l < wordHolder.length; l++) {
@@ -87,48 +94,51 @@ document.onkeyup = function (event) {
         remainingGuessesText.textContent = guessesRemaining; // Print the remaining guesses.
     }
 
-    // Check to see if the word has been successfully found.
-    var wordFound = false;
-    if (wordHolder.indexOf("_") == -1) {
-        wordFound = true;
+    if (wordFound && !(guessesRemaining < 0)) {
+        alert("Congratulations! You won!");
+
+        wins++;
+        winsText.textContent = wins;
+
+        hiddenWordText.textContent = "";
+        guessedLettersText.textContent = "";
+
+        // Randomly chooses a word from the array of available words.
+        wordChosen = wordList[Math.floor(Math.random() * wordList.length)];
+        wordHolder = new Array(wordChosen.length); // Create an array the same length as the chosen word.
+
+        // 
+        for (var i = 0; i < wordChosen.length; i++) {
+            wordHolder[i] = "_";
+            hiddenWordText.textContent += "_ ";
+        }
+
+        guessedLetters = new Array(); // Keep track of the guessed letters.
+        guessesRemaining = 7; // Keep track of the number of guesses remaining.
+
+        remainingGuessesText.textContent = guessesRemaining;
+    } else if (guessesRemaining <= 0 && !wordFound) {
+        alert("Sorry, you lost!");
+
+        losses++;
+        lossesText.textContent = losses;
+
+        hiddenWordText.textContent = "";
+        guessedLettersText.textContent = "";
+
+        // Randomly chooses a word from the array of available words.
+        wordChosen = wordList[Math.floor(Math.random() * wordList.length)];
+        wordHolder = new Array(wordChosen.length); // Create an array the same length as the chosen word.
+
+        // 
+        for (var i = 0; i < wordChosen.length; i++) {
+            wordHolder[i] = "_";
+            hiddenWordText.textContent += "_ ";
+        }
+
+        guessedLetters = new Array(); // Keep track of the guessed letters.
+        guessesRemaining = 7; // Keep track of the number of guesses remaining.
+
+        remainingGuessesText.textContent = guessesRemaining;      
     }
-    console.log(wordFound);
-
-    // if (guessesRemaining <= 0 && wordFound) {
-    //     alert("Congratulations! You won!");
-        
-    //     wins++;
-    //     winsText.textContent = wins;
-
-    //     // Randomly chooses a word from the array of available words.
-    //     var wordChosen = wordList[Math.floor(Math.random() * wordList.length)];
-    //     var wordHolder = new Array(wordChosen.length); // Create an array the same length as the chosen word.
-
-    //     // 
-    //     for (var i = 0; i < wordChosen.length; i++) {
-    //         wordHolder[i] = "_";
-    //         hiddenWordText.textContent += "_ ";
-    //     }
-
-    //     var guessedLetters = new Array(); // Keep track of the guessed letters.
-    //     var guessesRemaining = 7; // Keep track of the number of guesses remaining.
-    // } else if (guessesRemaining <= 0 && !wordFound) {
-    //     alert("Sorry, you lost!");
-        
-    //     losses++;
-    //     lossesText.textContent = losses;
-
-    //     // Randomly chooses a word from the array of available words.
-    //     var wordChosen = wordList[Math.floor(Math.random() * wordList.length)];
-    //     var wordHolder = new Array(wordChosen.length); // Create an array the same length as the chosen word.
-
-    //     // 
-    //     for (var i = 0; i < wordChosen.length; i++) {
-    //         wordHolder[i] = "_";
-    //         hiddenWordText.textContent += "_ ";
-    //     }
-
-    //     var guessedLetters = new Array(); // Keep track of the guessed letters.
-    //     var guessesRemaining = 7; // Keep track of the number of guesses remaining.       
-    // }
 }
