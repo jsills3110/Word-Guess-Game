@@ -1,0 +1,22 @@
+Randomly pick a word for the user to guess
+	If this word is the same as the previous word, pick a different word
+Based on the length of the word, set the number of guesses the user can guess
+Display a number of _ equal to the length of the word
+When a user hits a key, first check that the key is a letter
+	If it wasn't, ignore it and ask the user for a valid guess
+	If it was, proceed to the next step
+Check to see if the user's guess is one of the letters of the word
+	If it was, display the letter in the appropriate location(s) of the word
+	If it wasn't, do nothing
+In either case, increment the number of guesses that the user has made and/or decrement the number of guesses the user has guessed
+Also, display the letter that the user guessed
+If all letters have been successfully guessed, the user wins and the win count should be incremented
+If the user runs out of guesses, the user loses and the loss count should be incremented
+In both cases, the word should be displayed on the screen
+Start a new game by randomly picking a new word
+
+Extra:
+Allow the user to pick a difficulty level
+	Easy has the highest number of available guesses
+	Medium lowers the number of available guesses
+	Hard has the lowest number of available guesses
