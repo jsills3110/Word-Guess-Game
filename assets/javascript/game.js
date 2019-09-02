@@ -114,7 +114,7 @@ document.onkeyup = function (event) {
         }
 
         guessedLetters = new Array(); // Keep track of the guessed letters.
-        guessesRemaining = 7; // Keep track of the number of guesses remaining.
+        guessesRemaining = wordChosen.length + 2; // Keep track of the number of guesses remaining.
 
         remainingGuessesText.textContent = guessesRemaining;
     
@@ -138,7 +138,7 @@ document.onkeyup = function (event) {
         }
 
         guessedLetters = new Array(); // Keep track of the guessed letters.
-        guessesRemaining = 7; // Keep track of the number of guesses remaining.
+        guessesRemaining = wordChosen.length + 2; // Keep track of the number of guesses remaining.
 
         remainingGuessesText.textContent = guessesRemaining;      
     }
