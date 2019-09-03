@@ -10,7 +10,9 @@ var NationalParkWordGuess = function () {
         previousWord = "", // The last word chosen.
         userGuess = "", // The character that the user guessed.
         guessedLetters = new Array(), // All of the guessed letters.
-        guessesRemaining = 0; // How many guesses are remaining.
+        guessesRemaining = 0, // How many guesses are remaining.
+        wins = 0, // The number of wins.
+        losses = 0; // The number of losses.
 
     // Private function.
     var replaceLetters = function () {
@@ -30,9 +32,6 @@ var NationalParkWordGuess = function () {
     }
 
     return {
-
-        wins: 0, // The number of wins.
-        losses: 0, // The number of losses.
 
         // Public function.
         initializeGame: function () {
@@ -83,12 +82,12 @@ var NationalParkWordGuess = function () {
 
         // Public function.
         gameWon: function () {
-            this.wins++;
+            wins++;
         },
 
         // Public function.
         gameLost: function () {
-            this.losses++;
+            losses++;
         },
 
         // Public function.
@@ -115,8 +114,18 @@ var NationalParkWordGuess = function () {
         },
 
         // Public function.
-        guessesRemaining: function () {
+        getGuessesRemaining: function () {
             return guessesRemaining;
+        },
+
+        // Public function.
+        getWins: function () {
+            return wins;
+        },
+
+        // Public function.
+        getLosses: function () {
+            return losses;
         }
     }
 }
@@ -162,9 +171,9 @@ document.onkeyup = function (event) {
 }
 
 function updateText() {
-    winsText.textContent = game.wins;
-    lossesText.textContent = game.losses;
-    remainingGuessesText.textContent = game.guessesRemaining();
+    winsText.textContent = game.getWins();
+    lossesText.textContent = game.getLosses();
+    remainingGuessesText.textContent = game.getGuessesRemaining();
     hiddenWordText.textContent = game.wordHolderToString();
     guessedLettersText.textContent = game.guessedLettersToString();
 }
