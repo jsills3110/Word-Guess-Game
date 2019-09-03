@@ -5,16 +5,16 @@ let game = {
         "preserve", "protect", "ranger", "conservation", "yellowstone", "glacier", "mountain", "animals",
         "fishing", "river", "environment", "flora", "fauna", "biodiversity", "biota", "community",
         "engagement", "habitat", "bear", "wolves", "deer", "salmon"],
-    wins: 0, // Keep track of the number of wins.
-    losses: 0, // Keep track of the number of losses.
-    wordChosen: "",
-    wordHolder: new Array(),
-    previousWord: "", // Record the last word chosen so it won't be repeated.
-    userGuess: "",
-    guessedLetters: new Array(), // Keep track of the guessed letters.
-    guessesRemaining: 0,
+    wins: 0, // The number of wins.
+    losses: 0, // The number of losses.
+    wordChosen: "", // The word chosen by the computer.
+    wordHolder: new Array(), // An array of _ to represent the wordChosen.
+    previousWord: "", // The last word chosen.
+    userGuess: "", // The character that the user guessed.
+    guessedLetters: new Array(), // All of the guessed letters.
+    guessesRemaining: 0, // How many guesses are remaining.
 
-    // Public function.
+    // Public function. 
     initializeGame: function () {
         // Randomly chooses a word from the array of available words.
         while (this.wordChosen == this.previousWord) {
