@@ -156,7 +156,7 @@ document.onkeyup = function (event) {
     } else {
         game.guessLetter(userGuess);
 
-        if (game.isWordFound() && !(game.isOutOfGuesses())) {
+        if (game.isWordFound() && (!game.isOutOfGuesses() || game.guessesRemaining() == 0)) {
             alert("Congratulations! You won!");
             game.gameWon();
             game.initializeGame();
