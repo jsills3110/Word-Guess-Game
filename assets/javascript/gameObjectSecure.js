@@ -132,6 +132,7 @@ var NationalParkWordGuess = function () {
             return losses;
         },
 
+        // Public function.
         printButtons: function () {
             document.getElementById("button-holder").innerHTML = "";
             for (const letter of this.alphabet) {
@@ -146,6 +147,7 @@ var NationalParkWordGuess = function () {
                     v.setAttribute('class', 'btn btn-secondary p-3 m-1');
                 }
                 v.setAttribute('style', 'min-width: 4rem');
+                v.setAttribute('onclick', 'alphabetClicked(this)');
                 v.value = upperLetter;
                 document.getElementById('button-holder').appendChild(v);
             }
@@ -167,7 +169,18 @@ updateText();
 
 // When the user presses and releases a key...
 document.onkeyup = function (event) {
-    var userGuess = event.key; // Grab which key the user pressed.
+    var userInput = event.key; // Grab which key the user pressed.
+    playTheGame(userInput);
+}
+
+function alphabetClicked(userClick) {
+    console.log(userClick.value.toLowerCase());
+    var userInput = userClick.value.toLowerCase();
+    playTheGame(userInput);
+}
+
+function playTheGame(userGuess) {
+    // var userGuess = input.key; // Grab which key the user pressed.
 
     // Check that the key was a letter, and not anything else.
     if (game.alphabet.indexOf(userGuess) == -1) {
