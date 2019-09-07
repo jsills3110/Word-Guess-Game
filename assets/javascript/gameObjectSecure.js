@@ -1,12 +1,12 @@
 var NationalParkWordGuess = function () {
     // wordList has the full list of words that the computer randomly picks from.
-    var wordList = ["national", "yosemite", "government", "wildlife", "conservancy", "nature", "unnapropriated",
-        "refuge", "buffalo", "hiking", "backpacking", "rainier", "grandcanyon", "forest", "reservation",
-        "preserve", "protect", "ranger", "conservation", "yellowstone", "glacier", "mountain", "animals",
-        "fishing", "river", "environment", "flora", "fauna", "biodiversity", "biota", "community",
-        "engagement", "habitat", "bear", "wolves", "deer", "salmon"],
-        alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", 
-        "s", "t", "u", "v", "w", "x", "y", "z"],
+    var wordList = ["NATIONAL", "YOSEMITE", "GOVERNMENT", "WILDLIFE", "CONSERVANCY", "NATURE", "UNNAPROPRIATED",
+        "REFUGE", "BUFFALO", "HIKING", "BACKPACKING", "RAINIER", "GRANDCANYON", "FOREST", "RESERVATION",
+        "PRESERVE", "PROTECT", "RANGER", "CONSERVATION", "YELLOWSTONE", "GLACIER", "MOUNTAIN", "ANIMALS",
+        "FISHING", "RIVER", "ENVIRONMENT", "FLORA", "FAUNA", "BIODIVERSITY", "BIOTA", "COMMUNITY",
+        "ENGAGEMENT", "HABITAT", "BEAR", "WOLVES", "DEER", "SALMON"],
+        alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", 
+        "S", "T", "U", "V", "W", "X", "Y", "Z"],
         wordChosen = "", // The word chosen by the computer.
         wordHolder = new Array(), // An array of _ to represent the wordChosen.
         previousWord = "", // The last word chosen.
@@ -51,6 +51,7 @@ var NationalParkWordGuess = function () {
             for (var i = 0; i < wordChosen.length; i++) {
                 wordHolder[i] = "_";
             }
+            this.printButtons();
         },
 
         // Public function.
@@ -131,11 +132,19 @@ var NationalParkWordGuess = function () {
         },
 
         printButtons: function () {
+            document.getElementById("button-holder").innerHTML = "";
             for (const letter of alphabet) {
                 var v = document.createElement('input');
-                v.type="button";
-                v.setAttribute('class', 'btn btn-secondary');
-                v.value=letter;
+                v.type = "button";
+                if (guessedLetters.indexOf(letter) != -1 && wordChosen.indexOf(letter) != -1) {
+                    v.setAttribute('class', 'btn btn-success p-3 m-1');
+                } else if (guessedLetters.indexOf(letter) != -1 && wordChosen.indexOf(letter) == -1) {
+                    v.setAttribute('class', 'btn btn-danger p-3 m-1');
+                } else {
+                    v.setAttribute('class', 'btn btn-secondary p-3 m-1');
+                }
+                v.setAttribute('style', 'min-width: 4rem');
+                v.value = letter;
                 document.getElementById('button-holder').appendChild(v);
             }
         },
@@ -152,15 +161,14 @@ var remainingGuessesText = document.getElementById("guesses-remaining");
 var game = new NationalParkWordGuess();
 
 game.initializeGame();
-game.printButtons();
 updateText();
 
 // When the user presses and releases a key...
 document.onkeyup = function (event) {
-    var userGuess = event.key; // Grab which key the user pressed.
+    var userGuess = event.key.toUpperCase(); // Grab which key the user pressed.
 
     // Check that the key was a letter.
-    if (!userGuess.match(/^[a-z]+$/i)) {
+    if (!userGuess.match(/^[A-Z]+$/i)) {
         alert("You must enter an alpha value; no other keys are allowed.");
 
         // Check that the letter was not already guessed.
@@ -180,6 +188,7 @@ document.onkeyup = function (event) {
         }
 
         updateText();
+        game.printButtons();
     }
 }
 
