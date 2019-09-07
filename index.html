@@ -1,30 +1,51 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>National Park Word Guess</title>
-  </head>
-  <body>
-    
-    <p id="begin">Press a letter key to guess a letter.</p>
-    <p>Guess the letters of the word: <span id="hidden-word"></span></p>
-    <p>Your guesses: <span id="guessed-letters"></span></p>
-    <p>Number of guesses remaining: <span id="guesses-remaining"></span></p>
-    <p>Wins: <span id="victories"></span></p>
-    <p>Losses: <span id="defeats"></span></p>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+  <title>National Park Word Guess</title>
+</head>
 
-    <script src="assets/javascript/gameObjectSecure.js"></script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+<body>
+
+  <div class="container">
+    <div class="row rounded-lg bg-light" style="margin-top: 12%; margin-bottom: 3%; min-height: 75vh;">
+      <div class="col-5 mx-auto my-auto pt-3 pb-3"
+        style="text-align: center; min-height: 100%; height: 100%;">
+        <img src="assets/images/US-NationalParkService-Logo.svg" class="img-fluid">
+      </div>
+      <div class="col mx-auto my-auto pt-3 pb-3"
+        style="text-align: center; min-height: 100%; height: 100%;">
+        <p id="begin">Press a letter key to guess a letter.</p>
+        <p>Guess the letters of the word: <span id="hidden-word"></span></p>
+        <p>Your guesses: <span id="guessed-letters"></span></p>
+        <p>Number of guesses remaining: <span id="guesses-remaining"></span></p>
+        <p>Wins: <span id="victories"></span></p>
+        <p>Losses: <span id="defeats"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/javascript/gameObjectSecure.js"></script>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
