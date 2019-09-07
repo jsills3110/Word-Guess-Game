@@ -5,6 +5,8 @@ var NationalParkWordGuess = function () {
         "preserve", "protect", "ranger", "conservation", "yellowstone", "glacier", "mountain", "animals",
         "fishing", "river", "environment", "flora", "fauna", "biodiversity", "biota", "community",
         "engagement", "habitat", "bear", "wolves", "deer", "salmon"],
+        alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", 
+        "s", "t", "u", "v", "w", "x", "y", "z"],
         wordChosen = "", // The word chosen by the computer.
         wordHolder = new Array(), // An array of _ to represent the wordChosen.
         previousWord = "", // The last word chosen.
@@ -126,7 +128,17 @@ var NationalParkWordGuess = function () {
         // Public function.
         getLosses: function () {
             return losses;
-        }
+        },
+
+        printButtons: function () {
+            for (const letter of alphabet) {
+                var v = document.createElement('input');
+                v.type="button";
+                v.setAttribute('class', 'btn btn-secondary');
+                v.value=letter;
+                document.getElementById('button-holder').appendChild(v);
+            }
+        },
     }
 }
 
@@ -140,6 +152,7 @@ var remainingGuessesText = document.getElementById("guesses-remaining");
 var game = new NationalParkWordGuess();
 
 game.initializeGame();
+game.printButtons();
 updateText();
 
 // When the user presses and releases a key...
