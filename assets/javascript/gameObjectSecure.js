@@ -140,6 +140,16 @@ var NationalParkWordGuess = function () {
             return (guessedLetters.indexOf(theGuess) !== -1);
         },
 
+        // Check a full word against the word chosen.
+        checkWord: function (theWordGuess) {
+            return (theWordGuess == wordChosen);
+        },
+
+        // Reduce the number of guesses.
+        subtractGuess: function () {
+            adjustGuesses();
+        },
+
         // Return the number of guesses remaining.
         getGuessesRemaining: function () {
             return guessesRemaining;
@@ -153,6 +163,10 @@ var NationalParkWordGuess = function () {
         // Return the number of losses.
         getLosses: function () {
             return losses;
+        },
+
+        getPreviousWord: function () {
+            return previousWord;
         },
 
         // Dynamically append buttons to the document. The buttons represent the letters of the alphabet.
@@ -189,13 +203,13 @@ var NationalParkWordGuess = function () {
         // Reset the wins, losses, and previousWord, and initialize the game.
         reset: function () {
             resetWinsAndLosses();
-            this.initializeGame();
         }
     }
 }
 
 // Hold the text containers in the html in vars.
 var hiddenWordText = document.getElementById("hidden-word");
+var previousWordText = document.getElementById("previous-word");
 var winsText = document.getElementById("victories");
 var lossesText = document.getElementById("defeats");
 var remainingGuessesText = document.getElementById("guesses-remaining");
@@ -215,6 +229,27 @@ document.onkeyup = function (event) {
 function alphabetClicked(userClick) {
     var userInput = userClick.value.toLowerCase(); // Grab the letter that the user clicked.
     playTheGame(userInput); // Send the letter to playTheGame() function.
+}
+
+// When the user clicks on the Guess Full Word button...
+function guessWordClicked () {
+    var userWordGuess = prompt("Please type your guess here. Be careful to spell it correctly!").toLowerCase();
+
+    // If the user correctly guesses the chosen word...
+    if (game.checkWord(userWordGuess)) {
+        alert("Congratulations! You won!");
+        game.gameWon();
+        updatePreviousWord();
+        game.initializeGame();
+        game.printButtons();
+        updateText();
+    
+    // If the user did not correctly guess the chosen word...
+    } else {
+        alert("Sorry, that's incorrect! Try again.");
+        game.subtractGuess();
+        updateText();
+    }
 }
 
 // When the user clicks on the Hint button...
@@ -252,6 +287,8 @@ function resetGameClicked() {
     // If the user is sure...
     if (areYouSure) {
         game.reset();
+        updatePreviousWord();
+        game.initializeGame();
         updateText();
     }
 }
@@ -280,10 +317,12 @@ function checkWinCondition() {
     if (game.isWordFound() && (!game.isOutOfGuesses() || game.guessesRemaining() == 0)) {
         alert("Congratulations! You won!");
         game.gameWon();
+        updatePreviousWord();
         game.initializeGame();
     } else if (game.isOutOfGuesses() && !(game.isWordFound())) {
         alert("Sorry, you lost!");
         game.gameLost();
+        updatePreviousWord();
         game.initializeGame();
     }
 }
@@ -294,4 +333,10 @@ function updateText() {
     lossesText.textContent = game.getLosses();
     remainingGuessesText.textContent = game.getGuessesRemaining();
     hiddenWordText.textContent = game.wordHolderToString();
+}
+
+// Updating the previous word has to happen at different times than the rest of the text.
+// So it has it's own function.
+function updatePreviousWord() {
+    previousWordText.textContent = game.getPreviousWord().toUpperCase();
 }

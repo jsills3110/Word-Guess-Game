@@ -29,7 +29,11 @@
     <div class="row rounded-lg" style="background: rgba(248, 249, 250, 0.65);">
       <div class="col-9 mx-auto pt-3">
         <p id="begin">Press a letter key to guess a letter.</p>
-        <p>Guess the letters of the word: <span id="hidden-word"></span></p>
+        <div class="card mb-3" style="background: rgba(248, 249, 250, 0.65);">
+          <div class="card-body text-center">
+            <h1 class="card-title m-0" id="hidden-word"></h1>
+          </div>
+        </div>
         <div class="row">
           <div class="col mx-auto pb-3 text-center" id="button-holder">
           </div>
@@ -37,11 +41,13 @@
       </div>
       <div class="col mx-auto pt-3">
         <ul class="list-group justify-content-center pb-3">
-          <li class="list-group-item list-group-item-warning">Guesses Remaining: <span id="guesses-remaining"></span>
+          <li class="list-group-item list-group-item text-center">Previous Word: <span id="previous-word"></span></li>
+          <li class="list-group-item list-group-item-warning text-center">Guesses Remaining: <span id="guesses-remaining"></span>
           </li>
-          <li class="list-group-item list-group-item-success">Wins: <span id="victories"></span></li>
-          <li class="list-group-item list-group-item-danger">Losses: <span id="defeats"></span></li>
+          <li class="list-group-item list-group-item-success text-center">Wins: <span id="victories"></span></li>
+          <li class="list-group-item list-group-item-danger text-center">Losses: <span id="defeats"></span></li>
         </ul>
+        <button type="button" class="btn btn-secondary btn-block" onclick="guessWordClicked()">Guess Full Word</button>
         <button type="button" class="btn btn-secondary btn-block" onclick="hintClicked()">Hint</button>
         <button type="button" class="btn btn-secondary btn-block" onclick="newWordClicked()">New Word</button>
         <button type="button" class="btn btn-dark btn-block mb-3" onclick="resetGameClicked()">Reset Game</button>
