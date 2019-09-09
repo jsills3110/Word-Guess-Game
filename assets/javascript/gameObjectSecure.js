@@ -53,6 +53,7 @@ var NationalParkWordGuess = function () {
             while (wordChosen == previousWord) {
                 wordChosen = wordList[Math.floor(Math.random() * wordList.length)];
             }
+            // console.log(wordChosen);
             previousWord = wordChosen; // Set previousWord to wordChosen for the next time initializeGame is called.
             wordHolder = []; // Create an array the same length as the chosen word.
             userGuess = "";
@@ -314,7 +315,10 @@ function playTheGame(userGuess) {
 
 // Check whether or not the word has been found.
 function checkWinCondition() {
-    if (game.isWordFound() && (!game.isOutOfGuesses() || game.guessesRemaining() == 0)) {
+    // console.log(game.isWordFound());
+    // console.log(!game.isOutOfGuesses());
+    // console.log(game.getGuessesRemaining());
+    if (game.isWordFound() && (!game.isOutOfGuesses() || game.getGuessesRemaining() == 0)) {
         alert("Congratulations! You won!");
         game.gameWon();
         updatePreviousWord();
