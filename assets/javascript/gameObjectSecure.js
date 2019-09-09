@@ -6,10 +6,10 @@ var NationalParkWordGuess = function () {
         "fishing", "river", "environment", "flora", "fauna", "biodiversity", "biota", "community",
         "engagement", "habitat", "bear", "wolves", "deer", "salmon"],
         wordChosen = "", // The word chosen by the computer.
-        wordHolder = new Array(), // An array of _ to represent the wordChosen.
+        wordHolder = [], // An array of _ to represent the wordChosen.
         previousWord = "", // The last word chosen.
         userGuess = "", // The character that the user guessed.
-        guessedLetters = new Array(), // All of the guessed letters.
+        guessedLetters = [], // All of the guessed letters.
         guessesRemaining = 0, // How many guesses are remaining.
         wins = 0, // The number of wins.
         losses = 0; // The number of losses.
@@ -31,6 +31,13 @@ var NationalParkWordGuess = function () {
         // console.log(guessesRemaining);
     }
 
+    // Private function.
+    var resetWinsAndLosses = function () {
+        wins = 0;
+        losses = 0;
+        previousWord = "";
+    }
+
     return {
 
         alphabet: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
@@ -43,14 +50,14 @@ var NationalParkWordGuess = function () {
                 wordChosen = wordList[Math.floor(Math.random() * wordList.length)];
             }
             previousWord = wordChosen;
-            wordHolder = new Array(wordChosen.length); // Create an array the same length as the chosen word.
+            wordHolder = []; // Create an array the same length as the chosen word.
             userGuess = "";
-            guessedLetters = new Array();
+            guessedLetters = [];
             guessesRemaining = wordChosen.length + 2; // Keep track of the number of guesses remaining.
 
             // Fill the wordHolder array with "_" equal to the length of the wordChosen.
             for (var i = 0; i < wordChosen.length; i++) {
-                wordHolder[i] = "_";
+                wordHolder.push("_");
             }
             this.printButtons();
         },
@@ -71,6 +78,18 @@ var NationalParkWordGuess = function () {
             }
 
             adjustGuesses();
+        },
+
+        // Public function.
+        giveHint: function () {
+            var randomLetter = wordChosen[Math.floor(Math.random() * wordChosen.length)];
+            if (guessedLetters.length != 0) {
+                while (guessedLetters.indexOf(randomLetter) != -1) {
+                    randomLetter = wordChosen[Math.floor(Math.random() * wordChosen.length)];
+                }
+                console.log(guessedLetters.indexOf(randomLetter));
+            }
+            this.guessLetter(randomLetter);
         },
 
         // Public function.
@@ -152,12 +171,16 @@ var NationalParkWordGuess = function () {
                 document.getElementById('button-holder').appendChild(v);
             }
         },
+
+        reset: function () {
+            resetWinsAndLosses();
+            this.initializeGame();
+        }
     }
 }
 
 // Hold the text containers in the html in vars.
 var hiddenWordText = document.getElementById("hidden-word");
-var guessedLettersText = document.getElementById("guessed-letters");
 var winsText = document.getElementById("victories");
 var lossesText = document.getElementById("defeats");
 var remainingGuessesText = document.getElementById("guesses-remaining");
@@ -174,35 +197,46 @@ document.onkeyup = function (event) {
 }
 
 function alphabetClicked(userClick) {
-    console.log(userClick.value.toLowerCase());
     var userInput = userClick.value.toLowerCase();
     playTheGame(userInput);
 }
 
-function playTheGame(userGuess) {
-    // var userGuess = input.key; // Grab which key the user pressed.
-
-    // Check that the key was a letter, and not anything else.
-    if (game.alphabet.indexOf(userGuess) == -1) {
-        alert("You must enter an alpha value; no other keys are allowed.");
-    // Check that the letter was not already guessed.
-    } else if (game.alreadyGuessed(userGuess)) {
-        alert("You have already guessed that letter; try a different one.");
-    } else {
-        game.guessLetter(userGuess);
-
-        if (game.isWordFound() && (!game.isOutOfGuesses() || game.guessesRemaining() == 0)) {
-            alert("Congratulations! You won!");
-            game.gameWon();
-            game.initializeGame();
-        } else if (game.isOutOfGuesses() && !(game.isWordFound())) {
-            alert("Sorry, you lost!");
-            game.gameLost();
-            game.initializeGame();
-        }
-
-        updateText();
+function hintClicked() {
+    var areYouSure = confirm("Are you sure? This will give you a letter, but deduct your remaining guesses by 1.");
+    if (areYouSure) {
+        game.giveHint();
+        checkWinCondition();
         game.printButtons();
+        updateText();
+    }
+}
+
+function newWordClicked() {
+    var areYouSure = confirm("Are you sure? This will count as a loss.");
+    if (areYouSure) {
+        game.initializeGame();
+        game.gameLost();
+        updateText();
+    }
+}
+
+function resetGameClicked() {
+    var areYouSure = confirm("Are you sure? This will give you a new word and reset your wins and losses to 0.");
+    if (areYouSure) {
+        game.reset();
+        updateText();
+    }
+}
+
+function checkWinCondition() {
+    if (game.isWordFound() && (!game.isOutOfGuesses() || game.guessesRemaining() == 0)) {
+        alert("Congratulations! You won!");
+        game.gameWon();
+        game.initializeGame();
+    } else if (game.isOutOfGuesses() && !(game.isWordFound())) {
+        alert("Sorry, you lost!");
+        game.gameLost();
+        game.initializeGame();
     }
 }
 
@@ -211,5 +245,21 @@ function updateText() {
     lossesText.textContent = game.getLosses();
     remainingGuessesText.textContent = game.getGuessesRemaining();
     hiddenWordText.textContent = game.wordHolderToString();
-    guessedLettersText.textContent = game.guessedLettersToString();
+}
+
+function playTheGame(userGuess) {
+    // var userGuess = input.key; // Grab which key the user pressed.
+
+    // Check that the key was a letter, and not anything else.
+    if (game.alphabet.indexOf(userGuess) == -1) {
+        alert("You must enter an alpha value; no other keys are allowed.");
+        // Check that the letter was not already guessed.
+    } else if (game.alreadyGuessed(userGuess)) {
+        alert("You have already guessed that letter; try a different one.");
+    } else {
+        game.guessLetter(userGuess);
+        checkWinCondition();
+        game.printButtons();
+        updateText();
+    }
 }

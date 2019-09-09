@@ -26,22 +26,25 @@
     </div>
   </header>
   <div class="container">
-    <div class="row rounded-top"
-      style="background: rgba(248, 249, 250, 0.65);">
-      <div class="col mx-auto pt-3">
-        <ul class="list-group list-group-horizontal justify-content-center">
-          <li class="list-group-item list-group-item-success">Wins: <span id="victories"></span></li>
-          <li class="list-group-item list-group-item-danger">Losses: <span id="defeats"></span></li>
-          <li class="list-group-item list-group-item-warning">Guesses Remaining: <span id="guesses-remaining"></span></li>
-        </ul>
+    <div class="row rounded-lg" style="background: rgba(248, 249, 250, 0.65);">
+      <div class="col-9 mx-auto pt-3">
         <p id="begin">Press a letter key to guess a letter.</p>
         <p>Guess the letters of the word: <span id="hidden-word"></span></p>
-        <p>Your guesses: <span id="guessed-letters"></span></p>
+        <div class="row">
+          <div class="col mx-auto pb-3 text-center" id="button-holder">
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="row rounded-bottom"
-      style="background: rgba(248, 249, 250, 0.65);">
-      <div class="col-10 mx-auto pb-3 text-center" id="button-holder">
+      <div class="col mx-auto pt-3">
+        <ul class="list-group justify-content-center pb-3">
+          <li class="list-group-item list-group-item-warning">Guesses Remaining: <span id="guesses-remaining"></span>
+          </li>
+          <li class="list-group-item list-group-item-success">Wins: <span id="victories"></span></li>
+          <li class="list-group-item list-group-item-danger">Losses: <span id="defeats"></span></li>
+        </ul>
+        <button type="button" class="btn btn-secondary btn-block" onclick="hintClicked()">Hint</button>
+        <button type="button" class="btn btn-secondary btn-block" onclick="newWordClicked()">New Word</button>
+        <button type="button" class="btn btn-dark btn-block mb-3" onclick="resetGameClicked()">Reset Game</button>
       </div>
     </div>
   </div>
