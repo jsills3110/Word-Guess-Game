@@ -68,12 +68,13 @@ var NationalParkWordGuess = function () {
 
         // Check to see if the guessed letter is present in the chosen word.
         guessLetter: function (theGuess) {
+            userGuess = theGuess;
             var letterFound = false;
             var j = 0;
 
             // Loop through the chosen word to check if the letter chosen is contained in the word.
             while (letterFound == false && j < wordChosen.length) {
-                if (theGuess == wordChosen[j]) {
+                if (userGuess == wordChosen[j]) {
                     letterFound = true;
                     replaceLetters(); // If the letter was found, put the letter(s) in the wordHolder.
                 }
@@ -201,7 +202,7 @@ var remainingGuessesText = document.getElementById("guesses-remaining");
 
 var game = new NationalParkWordGuess(); // Initialize a new NationalParkWordGuess game.
 
-game.initializeGame(); 
+game.initializeGame();
 updateText();
 
 // When the user presses and releases a key...
@@ -224,7 +225,7 @@ function hintClicked() {
     // If the user is sure...
     if (areYouSure) {
         game.giveHint();
-        checkWinCondition(); 
+        checkWinCondition();
         game.printButtons();
         updateText();
     }
@@ -255,6 +256,25 @@ function resetGameClicked() {
     }
 }
 
+// Check for valid input and guess the letter.
+function playTheGame(userGuess) {
+    // If the input is not a letter...
+    if (game.alphabet.indexOf(userGuess) == -1) {
+        alert("You must enter an alpha value; no other keys are allowed.");
+    
+    // If the letter has already been guessed...
+    } else if (game.alreadyGuessed(userGuess)) {
+        alert("You have already guessed that letter; try a different one.");
+    
+    // Guess the letter and update the document.
+    } else {
+        game.guessLetter(userGuess);
+        checkWinCondition();
+        game.printButtons();
+        updateText();
+    }
+}
+
 // Check whether or not the word has been found.
 function checkWinCondition() {
     if (game.isWordFound() && (!game.isOutOfGuesses() || game.guessesRemaining() == 0)) {
@@ -274,23 +294,4 @@ function updateText() {
     lossesText.textContent = game.getLosses();
     remainingGuessesText.textContent = game.getGuessesRemaining();
     hiddenWordText.textContent = game.wordHolderToString();
-}
-
-// Check for valid input and guess the letter.
-function playTheGame(userGuess) {
-    // If the input is not a letter...
-    if (game.alphabet.indexOf(userGuess) == -1) {
-        alert("You must enter an alpha value; no other keys are allowed.");
-    
-    // If the letter has already been guessed...
-    } else if (game.alreadyGuessed(userGuess)) {
-        alert("You have already guessed that letter; try a different one.");
-    
-    // Guess the letter and update the document.
-    } else {
-        game.guessLetter(userGuess);
-        checkWinCondition();
-        game.printButtons();
-        updateText();
-    }
 }
