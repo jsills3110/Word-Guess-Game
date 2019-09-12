@@ -1,21 +1,17 @@
+/* Sets the background image of the body. */
 body {
     background: url("../images/mtrainier.jpg") no-repeat center center fixed;
     background-size: cover;
 }
 
-.logo-container {
-    position: relative;
+/* Sets a background color to a slightly opaque white. */
+.opaque-background {
+    background: rgba(248, 249, 250, 0.65);
 }
 
-.nat-park-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin-left: -40%;
-    margin-top: -40%;
-}
-
-.hangman-image {
-    position: absolute;
-    top: 0;
+/* Sets the style of the logo image so it centers nicely. */
+#logo-container {
+    text-align: center; 
+    min-height: 100%; 
+    height: 100%;
 }

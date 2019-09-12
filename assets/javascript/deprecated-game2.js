@@ -1,3 +1,9 @@
+// ***************************
+// ******* DEPRECATED ********
+// ***************************
+// *SAVED FOR REVIEW PURPOSES*
+// ***************************
+
 let game = {
     // wordList has the full list of words that the computer randomly picks from.
     wordList: ["national", "yosemite", "government", "wildlife", "conservancy", "nature", "unnapropriated",

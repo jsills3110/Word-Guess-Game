@@ -9,37 +9,46 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Custome CSS -->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
   <title>National Park Word Guess</title>
 </head>
 
 <body>
-
+  <!-- The header contains the image, which is the Hangman National Park Logo. -->
   <header>
     <div class="container">
       <div class="row">
-        <div class="col-6 mx-auto" style="text-align: center; min-height: 100%; height: 100%;">
+        <div class="col-6 mx-auto" id="logo-container">
           <img src="assets/images/HangmanSign.png" class="img-fluid">
         </div>
       </div>
     </div>
   </header>
+  <!-- This is the main content of the page. -->
   <div class="container">
-    <div class="row rounded-lg" style="background: rgba(248, 249, 250, 0.65);">
+    <div class="row rounded-lg opaque-background">
+      <!-- On the left side of the main content container. -->
       <div class="col-9 mx-auto pt-3 pb-3 text-center">
+        <!-- Instructions for the game. -->
         <h3 class="m-0" id="begin">Press a key or click on a button below to guess a letter.</h3>
-        <div class="card mt-4 mb-4" style="background: rgba(248, 249, 250, 0.65);">
+        <!-- Card that contains the hidden word, represented by underscores. -->
+        <div class="card mt-4 mb-4 opaque-background">
           <div class="card-body text-center">
             <h1 class="card-title m-0" id="hidden-word"></h1>
           </div>
         </div>
+        <!-- This row contains the button container. The buttons each represent a letter of the alphabet. -->
         <div class="row">
           <div class="col mx-auto text-center" id="button-holder">
           </div>
         </div>
       </div>
+      <!-- On the right side of the main content container. -->
       <div class="col mx-auto pt-3">
+        <!-- A Bootstrap list group that tells the user the previous word, how many guesses are remaining
+             and how wins and losses they have. -->
         <ul class="list-group justify-content-center pb-3">
           <li class="list-group-item list-group-item text-center">Previous Word: <span id="previous-word"></span></li>
           <li class="list-group-item list-group-item-warning text-center">Guesses Remaining: <span id="guesses-remaining"></span>
@@ -47,6 +56,8 @@
           <li class="list-group-item list-group-item-success text-center">Wins: <span id="victories"></span></li>
           <li class="list-group-item list-group-item-danger text-center">Losses: <span id="defeats"></span></li>
         </ul>
+        <!-- Buttons for the following: guessing the full word, receiving a hint, receiving a new word, 
+             and resetting the game. -->
         <button type="button" class="btn btn-secondary btn-block" onclick="guessWordClicked()">Guess Full Word</button>
         <button type="button" class="btn btn-secondary btn-block" onclick="hintClicked()">Hint</button>
         <button type="button" class="btn btn-secondary btn-block" onclick="newWordClicked()">New Word</button>
@@ -55,8 +66,9 @@
     </div>
   </div>
 
-  <script src="assets/javascript/gameObjectSecure.js"></script>
-  <!-- Optional JavaScript -->
+  <!-- Custom Javascript for running the game. -->
+  <script src="assets/javascript/game.js"></script>
+  <!-- Optional JavaScript for Bootstrap -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
